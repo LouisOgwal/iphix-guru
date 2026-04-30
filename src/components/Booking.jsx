@@ -54,7 +54,8 @@ export default function Booking() {
   };
 
   return (
-    <div className="section">
+    // ✅ FIX ADDED HERE
+    <div className="section" id="booking">
 
       <h2 style={{ textAlign: "center" }}>Book a Repair</h2>
 
