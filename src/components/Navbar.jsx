@@ -11,14 +11,13 @@ export default function Navbar() {
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#problems">Problems</a>
-        <a href="#whyus">Why Us</a>
-        <a href="#gallery">Work</a>
+
+        {/* grouped under services context instead of cluttering nav */}
         <a href="#booking">Book</a>
         <a href="#contact">Contact</a>
 
         <a href="https://wa.me/254745054505" target="_blank" rel="noreferrer">
-          <button className="btn">WhatsApp Us</button>
+          <button className="btn">WhatsApp</button>
         </a>
 
       </div>
