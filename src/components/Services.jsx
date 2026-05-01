@@ -2,166 +2,152 @@ import { useState } from "react";
 
 const services = [
 
-  /* 🔧 HARDWARE ISSUES */
   {
     title: "Screen Damage / Display Issues",
-    desc: "Cracked screen, black display, lines, flickering, or touch failure.",
+    desc: "Cracked screen, flickering, touch failure.",
     details:
-      "We replace and restore damaged displays using premium quality parts with full calibration and testing."
+      "We replace and restore damaged displays using premium quality parts with full calibration."
   },
   {
     title: "Battery Problems",
-    desc: "Fast draining, swelling, overheating, or random shutdowns.",
+    desc: "Fast draining, overheating, shutdowns.",
     details:
-      "We install high-quality batteries to restore original performance and battery health."
+      "Battery replacement and power optimization."
   },
   {
     title: "Charging Issues",
-    desc: "Not charging, slow charging, loose or damaged charging port.",
+    desc: "Not charging or loose port.",
     details:
-      "We repair or replace charging ports and fix power delivery issues."
+      "Charging port repair and power IC fixes."
   },
   {
     title: "Water / Liquid Damage",
-    desc: "Phone dropped in water, moisture damage, corrosion or short circuit.",
+    desc: "Liquid exposure or corrosion.",
     details:
-      "We perform deep ultrasonic cleaning and board-level diagnostics for recovery."
+      "Ultrasonic cleaning and board recovery."
   },
   {
     title: "Phone Not Turning On",
-    desc: "Dead phone, black screen, or no response at all.",
+    desc: "Dead phone or no response.",
     details:
-      "We diagnose motherboard, power IC, and battery issues to revive dead devices."
+      "Motherboard and power circuit diagnostics."
   },
   {
     title: "Speaker / Audio Issues",
-    desc: "No sound, low volume, or distorted audio output.",
+    desc: "No sound or distortion.",
     details:
-      "We repair or replace faulty speakers and audio components."
+      "Speaker and audio component repair."
   },
   {
     title: "Microphone Issues",
-    desc: "Voice not heard during calls or recordings failing.",
+    desc: "Voice not detected in calls.",
     details:
-      "We fix microphone hardware and audio input circuits."
-  },
-  {
-    title: "Camera Issues",
-    desc: "Blurry camera, black screen, or camera not opening.",
-    details:
-      "We repair front and rear camera modules and connections."
-  },
-  {
-    title: "Button Failures",
-    desc: "Power, volume, or home button not responding.",
-    details:
-      "We repair or replace faulty physical buttons."
+      "Microphone circuit repair."
   },
 
-  /* 💻 SOFTWARE ISSUES */
+  /* ✅ CAMERA FULL DETAIL (kept exactly, no change logic) */
   {
-    title: "Software Crash / Freezing",
-    desc: "Apps crashing, lagging, or phone freezing randomly.",
+    title: "Camera Issues",
+    desc: "Blurry camera, black screen, camera failure.",
+    details: `We repair front and rear camera modules and connections.
+
+Common symptoms include:
+
+• Blurry or Out-of-Focus Images  
+• Camera Not Opening  
+• Shaky or Vibrating Camera  
+• Flash Not Working  
+• Overheating During Use  
+• Poor Image Quality  
+• Front or Rear Camera Failure  
+• Camera App Freezing or Crashing  
+• Dust or Moisture Inside Lens  
+• Slow Camera Performance`
+  },
+
+  {
+    title: "Button Failures",
+    desc: "Power or volume buttons not working.",
     details:
-      "We fix system errors, optimize performance, and restore stability."
+      "Physical button and flex cable repair."
+  },
+
+  {
+    title: "Software Issues",
+    desc: "Crashes, freezing, system errors.",
+    details:
+      "System repair and optimization."
   },
   {
     title: "Boot Loop / Stuck Logo",
-    desc: "Phone stuck on startup or restarting repeatedly.",
+    desc: "Phone stuck on startup.",
     details:
-      "We repair firmware issues and restore proper boot sequence."
+      "Firmware repair and system recovery."
   },
   {
-    title: "Operating System Errors",
-    desc: "System bugs, failed updates, or corrupted OS.",
+    title: "Storage / Performance Issues",
+    desc: "Slow phone or low storage.",
     details:
-      "We reinstall or repair operating system software safely."
-  },
-  {
-    title: "Forgot Password / Locked Phone",
-    desc: "Screen lock, pattern lock, or device locked issues.",
-    details:
-      "We help unlock devices while preserving data where possible."
-  },
-  {
-    title: "Storage / Slow Performance",
-    desc: "Phone lagging, freezing, or running out of space.",
-    details:
-      "We clean system junk, optimize storage, and boost performance."
+      "System cleanup and optimization."
   },
   {
     title: "Virus / Malware Issues",
-    desc: "Popups, ads, or suspicious apps affecting phone.",
+    desc: "Popups or unwanted apps.",
     details:
-      "We remove malware and secure your device from threats."
+      "Malware removal and security cleanup."
   },
 
-  /* 📡 NETWORK ISSUES */
   {
     title: "No Network / SIM Issues",
-    desc: "No service, SIM not detected, or weak signal.",
-    details:
-      "We fix SIM reader, baseband, and network issues."
-  },
-  {
-    title: "WiFi / Bluetooth Issues",
-    desc: "WiFi not connecting or Bluetooth not pairing.",
-    details:
-      "We repair wireless connectivity hardware and software faults."
+    desc: "No service or SIM errors.",
+    details: `Baseband and network repair.
+
+Fixes:
+• No Service / Weak Signal  
+• SIM Not Detected  
+• Invalid IMEI  
+• Network Failure  
+• Connectivity Issues`
   },
 
-  /* ⚙️ ADVANCED REPAIR */
+  {
+    title: "WiFi / Bluetooth Issues",
+    desc: "Connection failures.",
+    details:
+      "Wireless module repair and troubleshooting."
+  },
+
   {
     title: "Logic Board Repair",
-    desc: "Microsoldering for motherboard-level issues.",
+    desc: "Advanced motherboard faults.",
     details:
-      "We repair IC chips, circuits, and deep board-level faults under microscope."
+      "Microsoldering and IC-level repair."
   },
   {
     title: "Data Recovery",
-    desc: "Recover lost photos, videos, and files from dead devices.",
+    desc: "Recover lost files.",
     details:
-      "We extract data from damaged or non-working phones."
+      "Data extraction from damaged devices."
   }
 ];
 
 export default function Services() {
   const [selected, setSelected] = useState(null);
 
-  // 🚀 FIXED WHATSAPP (MOBILE-FIRST + DESKTOP SAFE)
   const handleRequest = (service) => {
-
-    const priority =
-      service.title.includes("Water")
-        ? "HIGH PRIORITY 🚨"
-        : service.title.includes("Board")
-        ? "EXPERT LEVEL 🔧"
-        : service.title.includes("Software")
-        ? "SOFTWARE ISSUE 💻"
-        : "STANDARD";
-
     const message =
-`🛠 NEW REPAIR REQUEST - iPhix Guru
+`🛠 NEW REPAIR REQUEST - GuruPhix
 
-🏷 Service Type: ${service.title}
-📄 Issue Category: ${service.title}
+📱 Service: ${service.title}
 
-🧾 Description:
+🧾 Issue:
 ${service.desc}
 
-⚠️ Priority Tag:
-${priority}
-
-📍 Status: Pending Review
-🚀 Action Required: Respond ASAP`;
+🚀 Please assist ASAP`;
 
     const phone = "254745054505";
-    const text = encodeURIComponent(message);
+    const url = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
 
-    // ✅ BEST UNIVERSAL FIX (mobile + desktop + app fallback)
-    const url = `https://api.whatsapp.com/send?phone=${phone}&text=${text}`;
-
-    // IMPORTANT: same-tab navigation prevents desktop override bugs
     window.location.href = url;
   };
 
@@ -173,36 +159,32 @@ ${priority}
       </h2>
 
       <p style={{ textAlign: "center", opacity: 0.7, marginBottom: "40px" }}>
-        Select your issue and send a repair request instantly.
+        Tap a service to view details and request repair.
       </p>
 
-      {/* GRID */}
       <div className="grid grid-3">
 
         {services.map((s, i) => (
           <div
             key={i}
             className="card"
-            style={{ cursor: "pointer" }}
             onClick={() => setSelected(s)}
+            style={{ cursor: "pointer" }}
           >
             <h3>{s.title}</h3>
-            <p style={{ opacity: 0.7, fontSize: "14px" }}>
-              {s.desc}
-            </p>
+            <p style={{ opacity: 0.7 }}>{s.desc}</p>
           </div>
         ))}
 
       </div>
 
-      {/* MODAL */}
       {selected && (
         <div style={overlay}>
           <div style={modal}>
 
             <h2>{selected.title}</h2>
 
-            <p style={{ opacity: 0.8 }}>
+            <p style={{ whiteSpace: "pre-line", opacity: 0.8 }}>
               {selected.details}
             </p>
 
@@ -228,8 +210,6 @@ ${priority}
     </div>
   );
 }
-
-/* ===== STYLES ===== */
 
 const overlay = {
   position: "fixed",

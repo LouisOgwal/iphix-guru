@@ -5,20 +5,23 @@ html {
   scroll-behavior: smooth;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
   color: white;
+  overflow-x: hidden;
 
-  /* 💎 PREMIUM TECH BACKGROUND */
   background:
     radial-gradient(circle at 20% 20%, rgba(0, 229, 255, 0.08), transparent 40%),
     radial-gradient(circle at 80% 30%, rgba(0, 255, 163, 0.06), transparent 45%),
     radial-gradient(circle at bottom, #0a0a0a, #000);
-  overflow-x: hidden;
 }
 
-/* floating glow layer */
+/* glow */
 body::before {
   content: "";
   position: fixed;
@@ -35,32 +38,35 @@ body::before {
 }
 
 /* =======================
-   SECTION LAYOUT
+   SECTION
 ======================= */
 .section {
-  padding: 100px 20px;
+  padding: 70px 20px;
   max-width: 1100px;
   margin: auto;
   position: relative;
   z-index: 1;
 }
 
+/* fix stacking gap */
+.section + .section {
+  padding-top: 40px;
+}
+
+.section > * {
+  max-width: 100%;
+}
+
 /* =======================
    TYPOGRAPHY
 ======================= */
 h1, h2 {
-  letter-spacing: 0.5px;
   margin-bottom: 18px;
+  letter-spacing: 0.5px;
 }
 
-h1 {
-  font-size: 48px;
-}
-
-h2 {
-  font-size: 34px;
-  color: #ffffff;
-}
+h1 { font-size: 48px; }
+h2 { font-size: 34px; }
 
 p {
   color: rgba(255,255,255,0.7);
@@ -69,7 +75,7 @@ p {
 }
 
 /* =======================
-   BUTTON (PREMIUM GLOW)
+   BUTTON
 ======================= */
 .btn {
   background: linear-gradient(135deg, #00e5ff, #00ffa3);
@@ -80,38 +86,25 @@ p {
   font-weight: 600;
   cursor: pointer;
   transition: 0.3s ease;
-  box-shadow: 0 0 25px rgba(0, 229, 255, 0.25);
 }
 
 .btn:hover {
   transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 0 45px rgba(0, 229, 255, 0.55);
 }
 
 /* =======================
-   GLASSMORPHISM CARD
+   CARD
 ======================= */
 .card {
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.1);
   padding: 22px;
   border-radius: 18px;
-
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  transition: 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-}
-
-.card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(0,229,255,0.4);
-  box-shadow: 0 15px 50px rgba(0,229,255,0.12);
 }
 
 /* =======================
-   GRID SYSTEM
+   GRID
 ======================= */
 .grid {
   display: grid;
@@ -123,13 +116,14 @@ p {
 }
 
 /* =======================
-   NAVBAR (GLASS + ACTIVE FEEL)
+   NAVBAR (FIXED RESPONSIVE)
 ======================= */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 30px;
+  padding: 16px 20px;
+  flex-wrap: wrap;
 
   position: sticky;
   top: 0;
@@ -140,14 +134,11 @@ p {
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 
-/* navbar links glow */
 .navbar a {
   color: white;
   text-decoration: none;
   font-size: 14px;
   opacity: 0.7;
-  transition: 0.3s ease;
-  position: relative;
 }
 
 .navbar a:hover {
@@ -155,43 +146,20 @@ p {
   color: #00e5ff;
 }
 
-/* active underline effect */
-.navbar a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 0%;
-  height: 2px;
-  background: #00e5ff;
-  transition: 0.3s ease;
-}
-
-.navbar a:hover::after {
-  width: 100%;
-}
-
 /* =======================
-   HERO SECTION
+   HERO (FIXED MOBILE)
 ======================= */
 .hero {
-  height: 90vh;
+  min-height: 90vh;
   display: flex;
   align-items: center;
   position: relative;
-}
-
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+  padding: 40px 20px;
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  max-width: 700px;
 }
 
 /* =======================
@@ -199,10 +167,57 @@ p {
 ======================= */
 img {
   width: 100%;
+  height: auto;
   border-radius: 14px;
-  transition: 0.3s ease;
 }
 
-img:hover {
-  transform: scale(1.03);
+/* =======================
+   RESPONSIVE SYSTEM
+======================= */
+
+/* tablets */
+@media (max-width: 900px) {
+
+  h1 { font-size: 38px; }
+  h2 { font-size: 28px; }
+
+  .section {
+    padding: 60px 16px;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+}
+
+/* phones */
+@media (max-width: 600px) {
+
+  h1 { font-size: 30px; }
+  h2 { font-size: 24px; }
+
+  p { font-size: 14px; }
+
+  .section {
+    padding: 50px 14px;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .navbar div {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
 }

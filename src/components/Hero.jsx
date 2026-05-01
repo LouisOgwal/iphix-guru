@@ -19,7 +19,6 @@ export default function Hero() {
     const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
 
-    // optional reset
     setDevice("");
     setIssue("");
     setShowQuote(false);
@@ -27,26 +26,22 @@ export default function Hero() {
 
   return (
     <div
-      className="hero relative h-[90vh] flex items-center justify-center text-center overflow-hidden"
+      className="hero"
       style={{
         backgroundImage: "url('/media/hero.jpg')",
-        backgroundSize: "110%",
-        backgroundPosition: "center 30%",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      <div className="absolute inset-0 bg-black/70"></div>
+      <div className="hero-content">
 
-      <div className="hero-content relative z-10 px-6">
+        <h1>GuruPhix</h1>
 
-        <h1 className="text-5xl md:text-6xl font-bold mb-4">
-          GuruPhix
-        </h1>
-
-        <h2 className="text-xl md:text-3xl font-semibold mb-6 text-cyan-400">
+        <h2>
           Precision Phone Repair & Advanced Data Recovery
         </h2>
 
-        <p className="text-gray-300 mb-8 max-w-2xl mx-auto">
+        <p>
           We restore dead devices, repair logic boards, and recover lost data using professional tools and microsoldering.
         </p>
 
@@ -54,7 +49,7 @@ export default function Hero() {
           Get Repair Quote
         </button>
 
-        {/* QUOTE MODAL */}
+        {/* MODAL */}
         {showQuote && (
           <div style={overlay}>
             <div style={box}>
@@ -69,7 +64,7 @@ export default function Hero() {
               />
 
               <textarea
-                placeholder="Describe issue (screen, charging, software, etc.)"
+                placeholder="Describe issue"
                 value={issue}
                 onChange={(e) => setIssue(e.target.value)}
                 style={{ ...input, height: "100px" }}
@@ -81,13 +76,7 @@ export default function Hero() {
 
               <button
                 onClick={() => setShowQuote(false)}
-                style={{
-                  marginTop: "8px",
-                  background: "transparent",
-                  color: "white",
-                  border: "none",
-                  cursor: "pointer"
-                }}
+                style={closeBtn}
               >
                 Close
               </button>
@@ -101,7 +90,7 @@ export default function Hero() {
   );
 }
 
-/* ================= MODAL STYLES ================= */
+/* ================= STYLES ================= */
 
 const overlay = {
   position: "fixed",
@@ -132,4 +121,14 @@ const input = {
   background: "rgba(0,0,0,0.4)",
   color: "white",
   outline: "none",
+};
+
+const closeBtn = {
+  marginTop: "8px",
+  background: "transparent",
+  color: "white",
+  border: "1px solid rgba(255,255,255,0.3)",
+  padding: "10px",
+  borderRadius: "10px",
+  cursor: "pointer",
 };
